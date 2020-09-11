@@ -1,11 +1,49 @@
 const express = require("express")
 const mongoose = require("mongoose")
 
+
+
+// imports
+const data = require('./data.js')
+const Videos = require('./dbModel.js')
+// app config
 const app = express()
 const port = 9000
 
-app.get("/", (req, res) => {
-  res.status(200).send("Hello World")
+// middlewares
+app.use(express.json())
+
+// DB config 
+const connection_url = 'mongodb+srv://admin:admin10@cluster0.ninad.mongodb.net/tiktokdb?retryWrites=true&w=majority'
+
+mongoose.connect(connection_url,  {
+    useNewUrlParser: true,
+    useCreateIndex: true, 
+    useUnifiedTopology: true
 })
 
+
+// api endpoints
+app.get("/", (req, res) => {
+    res.status(200).send("Hello World")
+})
+
+app.get('/v1/posts', (req, res) => {
+    res.status(200).send(data)
+    console.log(data)
+})
+
+app.post('/v2/posts', (req,res) => {
+    const dbVideos = req.body
+
+    Videos.create(dbVideos, (err, data) =>{
+        if(err){ 
+            res.status(500).send(err)
+        } else {
+            res.status(201).send(data)
+        }
+    } )
+})
+
+// listen
 app.listen(port, () => console.log(`listening on localhost: ${port}`))
