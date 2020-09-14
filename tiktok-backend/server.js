@@ -8,10 +8,11 @@ const data = require('./data.js')
 const Videos = require('./dbModel.js')
 // app config
 const app = express()
-const port = 9000
+const port = process.env.PORT || 9000
 
 // middlewares
 app.use(express.json())
+
 
 // DB config 
 const connection_url = 'mongodb+srv://admin:admin10@cluster0.ninad.mongodb.net/tiktokdb?retryWrites=true&w=majority'
@@ -31,6 +32,16 @@ app.get("/", (req, res) => {
 app.get('/v1/posts', (req, res) => {
     res.status(200).send(data)
     console.log(data)
+})
+
+app.get('/v2/posts', (req, res) => {
+    Videos.find((err, data) => {
+        if(err){ 
+            res.status(500).send(err)
+        } else {
+            res.status(200).send(data)
+        }
+    })
 })
 
 app.post('/v2/posts', (req,res) => {
