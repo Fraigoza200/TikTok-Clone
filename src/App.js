@@ -4,7 +4,7 @@ import Video from './Video'
 
 function App() {
 
-  
+
 
   return (
     <div className="app">    
@@ -24,6 +24,14 @@ function App() {
       likes={250}
       messages={79}
       shares={562}
+      />
+      <Video url='https://player.vimeo.com/external/374358887.sd.mp4?s=7409139679fa834f10e78575f296a1c6471fcbee&profile_id=165&oauth2_token_id=57447761',
+      channel='Osotoro450',
+      description='Business Meeting',
+      song = 'Eye of the Tiger',
+      likes={750},
+      messages={230},
+      shares={45}
       />
     </div>
       {/* app container */}
