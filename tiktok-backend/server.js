@@ -1,11 +1,9 @@
-import express from "express"
-import mongoose from "mongoose"
-
-
+const express = require("express")
+const mongoose = require("mongoose")
 
 // imports
-import data from "./data.js"
-import Videos from "./dbModel.js"
+const data= require("./data.js")
+const Videos= require("./dbModel.js")
 // app config
 const app = express()
 const port = process.env.PORT || 9000
@@ -14,7 +12,7 @@ const port = process.env.PORT || 9000
 app.use(express.json())
 app.use((req, res ,next) => {
     res.setHeader("Access-Control-Allow-Origin", "*"),
-    res.setHeader("Access-Control-Allow-Header", "*"),
+    res.setHeader("Access-Control-Allow-Headers", "*"),
     next()
 })
 
