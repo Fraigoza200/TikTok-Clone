@@ -1,18 +1,22 @@
-const express = require("express")
-const mongoose = require("mongoose")
+import express from 'express'
+import mongoose from "mongoose"
 
 
 
 // imports
-const data = require('./data.js')
-const Videos = require('./dbModel.js')
+import data from './data.js'
+import Videos from './dbModel.js'
 // app config
 const app = express()
 const port = process.env.PORT || 9000
 
 // middlewares
 app.use(express.json())
-
+app.use((req, res ,next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*"),
+    res.setHeader("Access-Control-Allow-Origin", "*"),
+    next()
+})
 
 // DB config 
 const connection_url = 'mongodb+srv://admin:admin10@cluster0.ninad.mongodb.net/tiktokdb?retryWrites=true&w=majority'
